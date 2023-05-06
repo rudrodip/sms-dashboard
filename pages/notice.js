@@ -4,7 +4,7 @@ import { FileInputButton } from '@/components/fileInput'
 import Calendar from 'react-calendar';
 import { db, storage } from '@/src/config/firebase.config';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 

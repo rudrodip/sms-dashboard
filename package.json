@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon node index",
+    "dev": "next dev",
     "build": "next build",
-    "start": "node index",
-    "lint": "next lint",
-    "vc": "vercel dev"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
