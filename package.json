@@ -6,7 +6,8 @@
     "dev": "nodemon node index",
     "build": "next build",
     "start": "node index",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vc": "vercel dev"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
