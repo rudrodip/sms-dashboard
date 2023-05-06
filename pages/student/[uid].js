@@ -12,15 +12,17 @@ import Admin from '@/layouts/Admin'
 const Profile = () => {
   const router = useRouter()
   const { uid } = router.query
+  console.log(uid)
   const [userInfo, setUserinfo] = useState(null)
-  const [user, setUser] = useState(null)
   const { upload, setUserInfo, updateUserData } = useAuth()
 
   useEffect(() => {
     const docRef = collection(db, 'students')
-    let queryParam = query(docRef, where("studentID", "==", uid))
-    getDocs(queryParam)
-      .then((snapshot) => setUserinfo(snapshot.docs[0].data()))
+    if (uid) {
+      let queryParam = query(docRef, where("studentID", "==", uid))
+      getDocs(queryParam)
+        .then((snapshot) => setUserinfo(snapshot.docs[0].data()))
+    }
   }, [uid])
 
 
@@ -58,16 +60,6 @@ const Profile = () => {
             </div>
           </div>
         </section>
-        <input type="checkbox" id="my-modal" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box">
-            <h3 className="font-bold text-lg">Congratulations random Internet user!</h3>
-            <p className="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-            <div className="modal-action">
-              <label htmlFor="my-modal" className="btn">Yay!</label>
-            </div>
-          </div>
-        </div>
       </main>
     )
   } else {

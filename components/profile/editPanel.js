@@ -121,13 +121,14 @@ const EditPanel = ({ userInfo, upload, updateUserData, setUserInfo }) => {
       }
       if (image) {
         userInfo.photoURL = URL.createObjectURL(image);
-        let url = await upload(image, user, setLoading);
+        let url = await upload(image, userInfo?.uid);
         data["photoURL"] = url;
       }
       Object.keys(data).map(key => {
         userInfo[key] = data[key]
       })
-      updateUserData(user, data);
+      console.log(data)
+      updateUserData(userInfo?.uid, data);
       toast("Updated", successToastConfig);
       setUserInfo({ ...userInfo })
     } catch (error) {
