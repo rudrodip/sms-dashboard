@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon node index.js",
+    "dev": "nodemon node index",
     "build": "next build",
-    "start": "next start",
+    "start": "node index",
     "lint": "next lint"
   },
   "dependencies": {
