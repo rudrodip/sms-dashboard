@@ -57,11 +57,11 @@ const Notice = () => {
       />
 
       <h1 className='font-bold text-white text-4xl text-center m-5'>Create a notice</h1>
-      <div className='container mx-auto w-2/3 rounded-md bg-gray-800 p-3 border-2 border-gray-600'>
+      <div className='container mx-auto w-full lg:w-2/3 rounded-md bg-gray-800 p-3 border-2 border-gray-600'>
         <div className='grid lg:grid-cols-2'>
           <div>
             <h1>Title of notice</h1>
-            <input type="text" placeholder="title" className="input input-bordered w-full max-w-xs my-3" onChange={(e) => setTitle(e.target.value)} />
+            <input type="text" placeholder="title" className="input input-bordered max-w-xs my-3" onChange={(e) => setTitle(e.target.value)} />
             <FileInputButton
               label="Upload file"
               uploadFileName="theFiles"
@@ -71,7 +71,9 @@ const Notice = () => {
               allowMultipleFiles={false}
             />
             <p className='my-2'>Selected date: {date.toDateString()}</p>
-            <Calendar onChange={onChange} value={date} />
+            <div className='flex lg:justify-start justify-center items-center'>
+              <Calendar onChange={onChange} value={date} />
+            </div>
           </div>
           <div className='h-auto flex justify-start align-middle items-center flex-col rounded-md'>
             <p>Preview panel</p>

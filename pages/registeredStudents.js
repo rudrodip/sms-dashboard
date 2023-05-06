@@ -75,7 +75,7 @@ const RegisteredStudents = () => {
   return (
     <div>
       <h1 className="font-bold text-5xl text-center m-3 p-1">All Registered Students</h1>
-      <div className='container mx-auto w-2/3 rounded-md bg-gray-800 p-3 border-2 border-gray-600'>
+      <div className='container mx-auto w-full lg:w-2/3 rounded-md bg-gray-800 p-3 border-2 border-gray-600'>
         <div className="dropdown">
           <input tabIndex={0} type="text" placeholder="Search here by name..." className="input input-bordered w-full max-w-xs" />
           <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">

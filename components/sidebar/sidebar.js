@@ -16,7 +16,9 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 const Sidebar = ({ children }) => {
   const [toggle, setToggle] = useState(false)
-  const toggleSidebar = () => setToggle(!toggle)
+  const toggleSidebar = () => {
+    setToggle(!toggle)
+  }
 
   return (
     <div className="drawer drawer-mobile">
@@ -31,60 +33,15 @@ const Sidebar = ({ children }) => {
           <div className='flex justify-end items-center'>
             <AiOutlineClose className='lg:hidden w-6 h-6' onClick={toggleSidebar} />
           </div>
-          <li>
-            <span>
-              <MdDashboard className='w-6 h-6' />
-              <Link href="/">Dashboard</Link>
-            </span>
-          </li>
-          <li>
-            <span>
-              <MdOutlineAddHome className='w-6 h-6' />
-              <Link href="/institution">Institution</Link>
-            </span>
-          </li>
-          <li>
-            <span>
-              <TbReportAnalytics className='w-6 h-6' />
-              <Link href="/">Bi Report</Link>
-            </span>
-          </li>
-          <li>
-            <span>
-              <GiArchiveRegister className='w-6 h-6' />
-              <Link href="/register">Register Student</Link>
-            </span>
-          </li>
-          <li>
-            <span>
-              <HiOutlineDocumentChartBar className='w-6 h-6' />
-              <Link href="/registeredStudents">Registered Students</Link>
-            </span>
-          </li>
-          <li>
-            <span>
-              <BiSearchAlt2 className='w-6 h-6' />
-              <Link href="/registeredStudents">Student Search</Link>
-            </span>
-          </li>
-          <li>
-            <span>
-              <CgArrowUpR className='w-6 h-6' />
-              <Link href="/registeredStudents">Promote Students</Link>
-            </span>
-          </li>
-          <li>
-            <span>
-              <HiOutlineDocumentDuplicate className='w-6 h-6' />
-              <Link href="/">Result Management</Link>
-            </span>
-          </li>
-          <li>
-            <span>
-              <AiOutlineNotification className='w-6 h-6' />
-              <Link href="/notice">Notice</Link>
-            </span>
-          </li>
+          <SidebarButton Icon={MdDashboard} name="Dashboard" link="/" />
+          <SidebarButton Icon={MdOutlineAddHome} name="Institution" link="/institution" />
+          <SidebarButton Icon={TbReportAnalytics} name="Bi Report" link="/" />
+          <SidebarButton Icon={GiArchiveRegister} name="Register Student" link="/register" />
+          <SidebarButton Icon={HiOutlineDocumentChartBar} name="Registered Students" link="/registeredStudents" />
+          <SidebarButton Icon={BiSearchAlt2} name="Student Search" link="/registeredStudents" />
+          <SidebarButton Icon={CgArrowUpR} name="Promote Students" link="/registeredStudents" />
+          <SidebarButton Icon={HiOutlineDocumentDuplicate} name="Result Management" link="/" />
+          <SidebarButton Icon={AiOutlineNotification} name="Notice" link="/notice" />
         </ul>
       </div>
     </div>
@@ -92,3 +49,14 @@ const Sidebar = ({ children }) => {
 };
 
 export default Sidebar;
+
+const SidebarButton = ({ Icon, name, link, clickHanlder }) => {
+  return (
+    <li>
+      <Link href={link} onClick={clickHanlder}>
+        <Icon className='w-6 h-6' />
+        <p className='text-white'>{name}</p>
+      </Link>
+    </li>
+  )
+}
