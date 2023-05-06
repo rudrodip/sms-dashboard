@@ -127,7 +127,6 @@ const EditPanel = ({ userInfo, upload, updateUserData, setUserInfo }) => {
       Object.keys(data).map(key => {
         userInfo[key] = data[key]
       })
-      console.log(data)
       updateUserData(userInfo?.uid, data);
       toast("Updated", successToastConfig);
       setUserInfo({ ...userInfo })

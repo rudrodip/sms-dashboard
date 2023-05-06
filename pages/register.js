@@ -180,7 +180,7 @@ const Register = () => {
 
       <section className="max-w-4xl p-6 mx-auto rounded-md my-10">
         <div className='text-sm text-gray-200 mt-3'>
-          <div className="block mx-auto rounded-full h-40 w-40 bg-cover bg-center" style={{ backgroundImage: `url('${tempImageUrl}` }}></div>
+          <div className="block mx-auto rounded-full h-40 w-40 bg-cover bg-center" crossOrigin="anonymous" style={{ backgroundImage: `url('${tempImageUrl}` }}></div>
         </div>
         <div className="py-6 px-3 flex justify-center">
           <FileInputButton

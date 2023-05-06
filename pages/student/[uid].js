@@ -12,7 +12,6 @@ import Admin from '@/layouts/Admin'
 const Profile = () => {
   const router = useRouter()
   const { uid } = router.query
-  console.log(uid)
   const [userInfo, setUserinfo] = useState(null)
   const { upload, setUserInfo, updateUserData } = useAuth()
 

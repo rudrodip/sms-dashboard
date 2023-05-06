@@ -12,6 +12,7 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import { CgArrowUpR } from 'react-icons/cg'
 import { HiOutlineDocumentDuplicate } from 'react-icons/hi2'
 import { AiOutlineNotification } from 'react-icons/ai'
+import { AiOutlineClose } from 'react-icons/ai'
 
 const Sidebar = ({ children }) => {
   const [toggle, setToggle] = useState(false)
@@ -27,6 +28,9 @@ const Sidebar = ({ children }) => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay" onClick={toggleSidebar}></label>
         <ul className="menu p-4 w-50 bg-gray-900 text-gray-300 hover:bg-gray-800">
+          <div className='flex justify-end items-center'>
+            <AiOutlineClose className='lg:hidden w-6 h-6' onClick={toggleSidebar} />
+          </div>
           <li>
             <span>
               <MdDashboard className='w-6 h-6' />
@@ -35,13 +39,13 @@ const Sidebar = ({ children }) => {
           </li>
           <li>
             <span>
-              <MdOutlineAddHome className='w-6 h-6'/>
+              <MdOutlineAddHome className='w-6 h-6' />
               <Link href="/institution">Institution</Link>
             </span>
           </li>
           <li>
             <span>
-              <TbReportAnalytics className='w-6 h-6'/>
+              <TbReportAnalytics className='w-6 h-6' />
               <Link href="/">Bi Report</Link>
             </span>
           </li>
@@ -65,19 +69,19 @@ const Sidebar = ({ children }) => {
           </li>
           <li>
             <span>
-              <CgArrowUpR className='w-6 h-6'/>
+              <CgArrowUpR className='w-6 h-6' />
               <Link href="/registeredStudents">Promote Students</Link>
             </span>
           </li>
           <li>
             <span>
-              <HiOutlineDocumentDuplicate className='w-6 h-6'/>
+              <HiOutlineDocumentDuplicate className='w-6 h-6' />
               <Link href="/">Result Management</Link>
             </span>
           </li>
           <li>
             <span>
-              <AiOutlineNotification className='w-6 h-6'/>
+              <AiOutlineNotification className='w-6 h-6' />
               <Link href="/notice">Notice</Link>
             </span>
           </li>

@@ -23,7 +23,7 @@ const StudentTable = ({ array }) => {
               array.map(s => {
                 let studentData = s.data()
                 return (
-                  <tr key={s}>
+                  <tr key={studentData.uid}>
                     <th>
                       <label>
                         <input type="checkbox" className="checkbox" />
