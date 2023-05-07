@@ -28,6 +28,7 @@ const RegisteredStudents = () => {
   const [max, setMax] = useState(300)
   const [min, setMin] = useState(1)
   const [roll, setRoll] = useState('')
+  const [skill, setSkill] = useState('Any')
 
   useEffect(() => {
     const docRef = collection(db, "students");
@@ -37,12 +38,15 @@ const RegisteredStudents = () => {
     } else if (gender != 'Any') {
       queryParam = query(docRef, where("class", "==", grade), where("session", "==", session), where("gender", "==", gender))
     }
+    if (skill != 'Any'){
+      queryParam = query(docRef, where("class", "==", grade), where("session", "==", session), where("skills", "array-contains", skill))
+    }
     getDocs(queryParam).then((snapshots) => {
       setStudents(snapshots.docs)
       setFiltered(snapshots.docs)
     })
 
-  }, [grade, session, roll, gender])
+  }, [grade, session, roll, gender, skill])
 
   const handleChange = (e) => {
     if (e.target.name == 'class') {
@@ -51,7 +55,6 @@ const RegisteredStudents = () => {
     else if (e.target.name == 'roll') {
       setRoll(e.target.value)
       setGender('Any')
-      setSection('Any')
     }
     else if (e.target.name == 'session') {
       setSession(e.target.value)
@@ -64,6 +67,9 @@ const RegisteredStudents = () => {
     }
     else if (e.target.name == 'max') {
       setMax(e.target.value)
+    }
+    else if (e.target.name == 'skill') {
+      setSkill(e.target.value)
     }
   }
 
@@ -126,10 +132,17 @@ const RegisteredStudents = () => {
             handleChange={handleChange}
             value={session}
           />
+          <SelectionBox
+            label="Skills"
+            name="skill"
+            options={["Any", "Critical thinking", "Time management", "Effective communication", "Problem-solving", "Leadership", "Collaboration", "Information literacy", "Digital literacy", "Financial literacy", "Public speaking", "Teamwork", "Research", "Writing", "Study skills", "Coding", "Athleticism", "Team sports", "Individual sports", "Yoga", "Dance", "Mathematics", "Science", "History", "Foreign language proficiency", "Debate", "Persuasion", "Negotiation", "Diplomacy"]}
+            handleChange={handleChange}
+            value={skill}
+          />
         </div>
         <button className="btn btn-info" onClick={filterSection}>Apply Filter</button>
       </div>
-      <StudentTable array={filtered}/>
+      <StudentTable array={filtered} />
     </div>
   )
 }
