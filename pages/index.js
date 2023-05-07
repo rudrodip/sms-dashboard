@@ -227,12 +227,12 @@ const class11 = {
 const class12 = {
   students: 270,
   male: {
-    registered: 1,
-    unregistered: 119,
+    registered: 3,
+    unregistered: 117,
   },
   female: {
-    registered: 0,
-    unregistered: 150,
+    registered: 1,
+    unregistered: 149,
   },
   other: {
     registered: 0,
