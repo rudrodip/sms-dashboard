@@ -2,7 +2,7 @@ import React from 'react'
 
 const InfoPanel = ({ userInfo }) => {
   return (
-    <div className='info'>
+    <div className='info text-white'>
       <h1 className="text-3xl my-2 font-bold pt-8 lg:pt-0">{userInfo?.name}</h1>
       <div className='text-md mt-0.5'>
         <span className='font-semibold'>Session: </span>
