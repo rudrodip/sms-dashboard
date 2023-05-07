@@ -4,16 +4,46 @@ import { FileInputButton } from '@/components/fileInput'
 import Calendar from 'react-calendar';
 import { db, storage } from '@/src/config/firebase.config';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc, collection, query, where, getDocs } from 'firebase/firestore'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { sms_send } from '@/utils/sms';
+import TextFormField from '@/components/form/textFormField';
 
 const Notice = () => {
   const [file, setFile] = useState(null)
   const [title, setTitle] = useState('')
   const [loading, setLoading] = useState(false)
   const [date, onChange] = useState(new Date());
+  const [max, setMax] = useState(300)
+  const [min, setMin] = useState(1)
+  const [phones, setPhones] = useState([])
+  const [emails, setEmails] = useState([])
+  const [message, setMessage] = useState('')
 
+  const getStudentsContactsRange = (min, max) => {
+    const docRef = collection(db, 'students');
+    const queryParam = query(docRef, where("roll", ">=", min), where("roll", "<=", max));
+    
+    // execute the query and return the results
+    getDocs(queryParam)
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          phones.push(data.phone);
+          emails.push(data.email)
+        });
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+  };
+
+  const sendSMS = () => {
+    getStudentsContactsRange(min, max)
+    sms_send(message, phones).then((e) => console.log('sent'))
+  }
+  
   const uploadNotice = async () => {
     setLoading(true)
     const noticeRef = doc(db, `notices/${title}_${date.toDateString()}`)
@@ -42,6 +72,15 @@ const Notice = () => {
 
   const onFileChange = async (file) => {
     setFile(file)
+  }
+
+  const handleChange = (e) => {
+    if (e.target.name == 'min') {
+      setMin(e.target.value)
+    }
+    else if (e.target.name == 'max') {
+      setMax(e.target.value)
+    }
   }
 
   return (
@@ -92,6 +131,25 @@ const Notice = () => {
             </div>
           </div>
         </div>
+        <div className='flex justify-center'>
+          <div className='lg:w-2/3 w-full flex flex-wrap m-3 justify-between items-center'>
+          <textarea type="text" placeholder="message.." className="input input-bordered w-full my-3" onChange={(e) => setMessage(e.target.value)} />
+            <TextFormField
+              label="Roll (min)"
+              placeholder="starting roll"
+              name="min"
+              handleChange={handleChange}
+              value={min}
+            />
+            <TextFormField
+              label="Roll (max)"
+              placeholder="ending roll"
+              name="max"
+              handleChange={handleChange}
+              value={max}
+            />
+          </div>
+        </div>
         {
           loading &&
 
@@ -106,7 +164,8 @@ const Notice = () => {
           </div>
         }
         <div className='flex justify-center'>
-          <button className='btn btn-info mt-3 hover:scale-105 duration-150' onClick={uploadNotice}>Submit</button>
+          <button className='btn btn-info mt-3 hover:scale-105 duration-150 mx-2' onClick={uploadNotice}>Submit</button>
+          <button className='btn btn-info mt-3 hover:scale-105 duration-150 mx-2' onClick={sendSMS}>Send SMS</button>
         </div>
       </div>
     </div>
